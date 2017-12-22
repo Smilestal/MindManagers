@@ -1,0 +1,3 @@
+如果你的子线程更新代码在满足下面的条件下，那么它可以顺利运行:
+    修改应用层的 viewRootImpl.java 源码，解除限制
+    把你更新代码写在 onResume 之前，例如 onCreate 里面，且，更新之际要赶在 viewRootImpl 初始化之前。
