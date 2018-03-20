@@ -67,7 +67,17 @@
 * 抽象类与接口的应用场景
 * 抽象类是否可以没有方法和属性？
 * 接口的意义
+
 * 泛型中extends和super的区别
+    泛型详解：http://www.importnew.com/24029.html
+
+    ”Producer Extends, Consumer Super”：
+
+    “Producer Extends” – 如果你需要一个只读List，用它来produce T，那么使用? extends T。
+    “Consumer Super” – 如果你需要一个只写List，用它来consume T，那么使用? super T。
+    如果需要同时读取以及写入，那么我们就不能使用通配符了。
+
+
 * 父类的静态方法能否被子类重写
 * 进程和线程的区别
 * final，finally，finalize的区别
