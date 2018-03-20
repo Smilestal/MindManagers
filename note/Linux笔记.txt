@@ -1,0 +1,23 @@
+Linux笔记：
+
+从普通用户切换到root用户：
+$ su - root
+Password: 
+su: Authentication failure
+Sorry.
+
+这时候输入
+
+$ sudo passwd root
+Enter new UNIX password: 
+Retype new UNIX password: 
+passwd: password updated successfully
+
+这时候就可以进入根目录了。
+
+
+查看ip地址
+ifconfig -a
+
+用gedit打开文件
+sudo gedit /etc/gitlab/gitlab.rb

@@ -1,0 +1,109 @@
+设置全局的用户名和邮箱
+git config --global user.name "Ganjinjin"
+git config --global user.email "1656534595@qq.com"
+
+生成ssh-key
+ssh-keygen -t rsa -C "your.email@example.com" -b 4096
+
+克隆仓库到本地
+Create a new repository
+
+git clone git@gitlab.com:Ganjinjin/my-two-project.git
+cd my-two-project
+touch README.md
+git add README.md
+git commit -m "add README"
+git push -u origin master
+
+
+Existing folder
+初始化本地仓库并提交到远程仓库
+
+cd existing_folder
+git init
+git remote add origin git@gitlab.com:Ganjinjin/my-two-project.git
+git add .
+git commit -m "Initial commit"
+git push -u origin master
+
+新建分支：
+git branch branch_name
+
+切换分支：
+git checkout branch_name
+
+新建并切换到该分支：
+git checkout -b branch_name
+
+合并分支：
+git checkout master
+git merge branch_name
+
+删除分支：
+git branch -d branch_name
+
+
+搭建gitlab服务器步骤：
+
+安装gitlab
+https://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/trusty/gitlab-ce_10.3.3-ce.0_amd64.deb
+
+https://linjk.github.io/2017/08/01/GitLab%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%85%8D%E7%BD%AE/
+
+安装后无法访问问题（502）：
+http://blog.csdn.net/csdn_yasin/article/details/51885331
+
+修改配置：
+vim /etc/gitlab/gitlab.rb
+
+刷新配置：
+sudo gitlab-ctl reconfigure
+
+重启：
+sudo gitlab-ctl restart
+
+配置TortoiseGit的ssh-key：
+http://blog.csdn.net/bendanbaichi1989/article/details/17916795
+
+工作流：
+https://docs.gitlab.com/ee/workflow/gitlab_flow.html
+
+代码审核：
+http://www.360doc.com/content/16/0920/17/1073512_592302821.shtml
+
+
+gitblit 
+http://blog.csdn.net/a117653909/article/details/51182188
+
+
+创建用户：
+useradd -c "user for gitlab" -s /bin/bash -g root gitlab
+usermod -d /home/gitlab gitlab
+ganjinjin:x:1000:1000:Ubuntu 64,,,:/home/ganjinjin:/bin/bash
+
+vim /etc/passwd
+
+查看用户列表：
+cut -d : -f 1 /etc/passwd
+
+git config --global user.name "ganjinjin"
+git config --global user.email 1656534595@qq.com
+
+git checkout -b developer
+
+git clone http://192.168.0.221:8888/root/my-project.git
+
+git config --global user.name "master"
+git config --global user.email master@qq.com
+
+
+关于Pull Request：
+所以项目成员都能收到，指派给谁，此人的工具栏会有个提醒标记，其他人需要主动去查看。
+所有人都能参与讨论，以及代码评论。
+只有master才能根据权限合并请求
+
+gitlab服务器访问地址
+http://192.168.0.221:8888/
+
+gitlab-ci runner安装：
+https://docs.gitlab.com/runner/install/linux-repository.html
