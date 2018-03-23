@@ -79,8 +79,13 @@
 
 
 * 父类的静态方法能否被子类重写
+    不能
+
 * 进程和线程的区别
+
 * final，finally，finalize的区别
+    http://blog.csdn.net/beixiaozhang/article/details/52955862
+
 * 序列化的方式
 * Serializable 和Parcelable 的区别
 * 静态属性和静态方法是否可以被继承？是否可以被重写？以及原因？
