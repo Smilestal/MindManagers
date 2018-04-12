@@ -82,6 +82,7 @@
     不能
 
 * 进程和线程的区别
+    https://www.cnblogs.com/lgk8023/p/6430592.html
 
 * final，finally，finalize的区别
     http://blog.csdn.net/beixiaozhang/article/details/52955862

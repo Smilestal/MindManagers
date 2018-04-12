@@ -1,42 +1,117 @@
 # Android面试题
+https://hit-alibaba.github.io/interview/Android/basic/Android-LaunchMode.html
 
 Android面试题除了Android基础之外，更多的问的是一些源码级别的、原理这些等。所以想去大公司面试，一定要多看看源码和实现方式，常用框架可以试试自己能不能手写实现一下，锻炼一下自己。
 
 ### 一、Android基础知识点
 
 * 四大组件是什么
+    Activity、Service、BroadcastReceiver、ContentProvider
+
 * 四大组件的生命周期和简单用法
+    Activity：
+        生命周期：onCreate、onStart、onResume、onPause、onStop、onRestart、onDestroy
+
+    Service：
+        生命周期：
+            手动方法：startService、bindService、unbindService、stopService
+            自动方法：onCreate、onStartCommand、onBind、onUnBind、onDestroy
+
+    BroadcastReceiver：
+        生命周期：onReceiver
+
+
 * Activity之间的通信方式
+    Intent
+    借助类的静态变量
+    借助全局变量/Application
+    借助外部工具
+    – 借助SharedPreference
+    – 使用Android数据库SQLite
+    – 赤裸裸的使用File
+    – Android剪切板
+    借助Service
+
 * Activity各种情况下的生命周期
 * 横竖屏切换的时候，Activity 各种情况下的生命周期
-* Activity与Fragment之间生命周期比较
 * Activity上有Dialog的时候按Home键时的生命周期
 * 两个Activity 之间跳转时必然会执行的是哪几个方法？
 * 前台切换到后台，然后再回到前台，Activity生命周期回调方法。弹出Dialog，生命值周期回调方法。
+
+* Activity与Fragment之间生命周期比较
+    Fragment生命周期：
+        被创建：
+            onAttach、onCreate、onCreateView、onActivityCreated
+        对用户可见：
+            onStart、onResume
+        进入后台模式：
+            onPause、onStop
+        被销毁：
+            onDestroyView、onDestroy、onDetach
+
+    fragments的大部分状态都和activitie很相似，但fragment有一些新的状态。
+
+    onAttached() —— 当fragment被加入到activity时调用（在这个方法中可以获得所在的activity）。
+    onCreateView() —— 当activity要得到fragment的layout时，调用此方法，fragment在其中创建自己的layout(界面)。
+    onActivityCreated() —— 当activity的onCreated()方法返回后调用此方法
+    onDestroyView() —— 当fragment中的视图被移除的时候，调用这个方法。
+    onDetach() —— 当fragment和activity分离的时候，调用这个方法。
+    一旦activity进入resumed状态（也就是running状态），你就可以自由地添加和删除fragment了。因此，只有当activity在resumed状态时，fragment的生命周期才能独立的运转，其它时候是依赖于activity的生命周期变化的。
+
+
 * Activity的四种启动模式对比
+    standard：每次启动Activity都会创建一个新的Activity实例
+    singleTop：每次扫描栈顶，如果在任务栈顶发现了相同的实例则重用，否则新建并压入栈顶。
+    singleTask：与singleTop的区别是singleTask会扫描整个任务栈，如果任务栈中存在相同的实例，则将其上层的实例全部移除，再重用，否则新建实例。
+    singleInstance：Activity的实例在一个独立的任务栈中，当不同应用交替调用次实例时，只要该任务栈中存在该实例，都重用。
+
 * Activity状态保存于恢复
+    什么时候需要保持数据
+        正常销毁时不需要保存数据
+            按back键或者Activity调用finish销毁时
+        非正常销毁时需要保存数据
+            被停止或长期未使用，或者前台Activity需要更多资源以致该Activity被系统关闭
+            屏幕旋转、键盘可用性改变、 语言改变
+            如果需要模拟这种情况的Activity销毁，可以打开开发者选项，选择不保留活动（英文为Do not keep activities），即可模拟内存不足时的系统行为。
+
+    什么时候调用onSaveInstanceState
+        屏幕旋转重建会调用onSaveInstanceState()
+        启动另一个activity: 当前activity在离开前会调用onSaveInstanceState()
+        按Home键的情形和启动另一个activity一样, 当前activity在离开前会onSaveInstanceState()
+
+    什么时候调用onRestoreInstanceState
+        保存的情况下重新回到该界面时，恢复数据调用此方法
+
+
 * fragment各种情况下的生命周期
 * Fragment状态保存startActivityForResult是哪个类的方法，在什么情况下使用？
+
 * 如何实现Fragment的滑动？
 * fragment之间传递数据的方式？
+
 * Activity 怎么和Service 绑定？
 * 怎么在Activity 中启动自己对应的Service？
 * service和activity怎么进行数据交互？
 * Service的开启方式
 * 请描述一下Service 的生命周期
+
 * 谈谈你对ContentProvider的理解
 * 说说ContentProvider、ContentResolver、ContentObserver 之间的关系
+
 * 请描述一下广播BroadcastReceiver的理解
 * 广播的分类
 * 广播使用的方式和场景
 * 在manifest 和代码中如何注册和使用BroadcastReceiver?
 * 本地广播和全局广播有什么差别？
 * BroadcastReceiver，LocalBroadcastReceiver 区别
+
 * AlertDialog,popupWindow,Activity区别
 * Application 和 Activity 的 Context 对象的区别
+
 * Android属性动画特性
 * 如何导入外部数据库?
 * LinearLayout、RelativeLayout、FrameLayout的特性及对比，并介绍使用场景。
+
 * 谈谈对接口与回调的理解
 * 回调的原理
 * 写一个回调demo
@@ -46,6 +121,11 @@ Android面试题除了Android基础之外，更多的问的是一些源码级别
 * 差值器
 * 估值器
 * Android中数据存储方式
+    网络
+    文件
+    SharedPerference
+    ContentProvider
+    SQLite数据库
 
 ### 二、Android源码相关分析
 
