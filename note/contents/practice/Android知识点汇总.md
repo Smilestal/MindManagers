@@ -535,7 +535,7 @@ Java调用C++
 
 1. 在Java中声明Native方法（即需要调用的本地方法）
 2. 编译上述 Java源文件javac（得到 .class文件）
-3。 通过 javah 命令导出JNI的头文件（.h文件）
+3. 通过 javah 命令导出JNI的头文件（.h文件）
 4. 使用 Java需要交互的本地代码 实现在 Java中声明的Native方法 
 5. 编译.so库文件
 6. 通过Java命令执行 Java程序，最终实现Java调用本地代码
@@ -648,3 +648,5 @@ JNIEXPORT void JNICALL Java_com_study_jnilearn_AccessMethod_callJavaInstaceMetho
 - MVVM：使用ViewModel代替Presenter，实现数据与View的双向绑定，这套框架最早使用的data-binding将数据绑定到xml里，这么做在大规模应用的时候是不行的，不过数据绑定是
 一个很有用的概念，后续Google又推出了ViewModel组件与LiveData组件。ViewModel组件规范了ViewModel所处的地位、生命周期、生产方式以及一个Activity下多个Fragment共享View
 Model数据的问题。LiveData组件则提供了在Java层面View订阅ViewModel数据源的实现方案。
+
+http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/0414/4143.html

@@ -273,7 +273,7 @@ synchronized是互斥同步的一种实现。
 ```java
 public class Singleton {
 
-    //volatile保证了：1 instance在多线程并发的可见性 2 禁止instance在操作是的指令重排序
+    //volatile保证了：1 instance在多线程并发的可见性 2 禁止instance在操作时的指令重排序
     private volatile static Singleton instance;
 
     private Singleton(){}
@@ -281,7 +281,7 @@ public class Singleton {
     public static Singleton getInstance() {
         //第一次判空，保证不必要的同步
         if (instance == null) {
-            //synchronized对Singleton加全局所，保证每次只要一个线程创建实例
+            //synchronized对Singleton加全局锁，保证每次只要一个线程创建实例
             synchronized (Singleton.class) {
                 //第二次判空时为了在null的情况下创建实例
                 if (instance == null) {
@@ -402,9 +402,9 @@ Java内存模型规定了所有字段（这些字段包括实例字段、静态�
 
 什么是指令重排序？🤔
 
-> 指令重排序是值指令乱序执行，即在条件允许的情况下，直接运行当前有能力立即执行的后续指令，避开为获取下一条指令所需数据而造成的等待，通过乱序执行的技术，提供执行效率。
+> 指令重排序是指 指令乱序执行，即在条件允许的情况下，直接运行当前有能力立即执行的后续指令，避开为获取下一条指令所需数据而造成的等待，通过乱序执行的技术，提供执行效率。
 
-指令重排序绘制被volatile修饰的变量的赋值操作前，添加一个内存屏障，指令重排序时不能把后面的指令重排序的内存屏障之前的位置。
+指令重排序会在被volatile修饰的变量的赋值操作前，添加一个内存屏障，指令重排序时不能把后面的指令重排序到内存屏障之前的位置。
 
 关于指令重排序不是本篇文章重点讨论的内容，更多细节可以参考[指令重排序](https://tech.meituan.com/java-memory-reordering.html)。
 
@@ -502,9 +502,9 @@ private Object readResolve(){
 }
 ```
 
-### 线程为什么阻塞，为和要使用多线程？
+### 线程为什么阻塞，为什么要使用多线程？
 
-使用多线程更多的是为了提高CPU的并发，可以让CPU同事处理多个事情，多线程场景的使用场景：
+使用多线程更多的是为了提高CPU的并发，可以让CPU同时处理多个事情，多线程场景的使用场景：
 
 1. 为了不让耗时操作阻塞主线程，开启新线程执行耗时操作。
 2. 某种任务虽然耗时但是不消耗CPU，例如：磁盘IO，可以开启新线程来做，可以显著的提高效率。
@@ -521,7 +521,7 @@ private Object readResolve(){
 - WAITING：等待状态，一般是调用了wait()、join()、LockSupport.spark()等方法。
 - TIMED_WAITING：超时等待状态，也就是带时间的等待状态。一般是调用了wait(time)、join(time)、LockSupport.sparkNanos()、LockSupport.sparkUnit()等方法。
 - BLOCKED：阻塞状态，等待锁的释放，例如调用了synchronized增加了锁。
-- TERMINATED：终止状态，一般是线程完成任务后退出或者异常终止。 
+- TERMINATED：终止状态，一般是线程完成任务后退出或者异常终止。
 
 NEW、WAITING、TIMED_WAITING都比较好理解，我们重点说一说RUNNABLE运行态和BLOCKED阻塞态。
 
