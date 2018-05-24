@@ -133,7 +133,7 @@ ___
 &emsp;&emsp;`![图片Alt](图片地址 “图片Title”)`
 
 **效果：**<br>
-![我的公众号](http://data.imchenchao.com/blog/images/xiaobaicode.jpg "扫码关注")
+![头像](./images/header.png "我的头像")
 
 **参考链接：**<br>
 &emsp;&emsp;[VSCode使用Markdown](https://imchenchao.com/blog/MarkdownVSCode/)<br>
