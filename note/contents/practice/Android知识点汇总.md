@@ -11,7 +11,7 @@ Android系统架构图
 - C++系统框架层
 - Linux内核层
 
-### Activity如与Service通信？
+### Activity如何与Service通信？
 
 可以通过bindService的方式，先在Activity里实现一个ServiceConnection接口，并将该接口传递给bindService()方法，在ServiceConnection接口的onServiceConnected()方法
 里执行相关操作。
@@ -80,7 +80,7 @@ protected void onCreate(@Nullable Bundle savedInstanceState) {
 Intent传递数据大小的限制大概在1M左右，超过这个限制就会静默崩溃。处理方式如下：
 
 - 进程内：EventBus，文件缓存、磁盘缓存。
-- 进程间：通过ContentProvider进行款进程数据共享和传递。
+- 进程间：通过ContentProvider进行跨进程数据共享和传递。
 
 ### 描述一下Android的事件分发机制？
 
@@ -98,7 +98,7 @@ public boolean dispatchTouchEvent(MotionEvent event){
     if(onInterceptTouchEvent(event)){
         // 父View调用onTouchEvent(event)消费事件，如果该方法返回true，表示
         // 该View消费了该事件，后续该事件序列的事件（Down、Move、Up）将不会在传递
-        // 该其他View。
+        // 给其他View。
         consume = onTouchEvent(event);
     }else{
         // 调用子View的dispatchTouchEvent(event)方法继续分发事件
